@@ -9,12 +9,18 @@ export default function Home() {
       <p className="text-gray-400 text-xl mb-8 max-w-xl">
         The esports recruitment platform connecting top players with competitive teams.
       </p>
-      <Link
-        href="/login"
-        className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition"
-      >
-        Get Started
-      </Link>
+      <div className="flex gap-4">
+        <Link
+          href="/listings"
+          className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3 rounded-lg transition">
+          Browse Listings
+        </Link>
+        <Link
+          href="/login"
+          className="bg-gray-800 hover:bg-gray-700 text-white font-semibold px-8 py-3 rounded-lg transition">
+          Sign In
+        </Link>
+      </div>
     </main>
   );
 }

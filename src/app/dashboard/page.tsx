@@ -107,16 +107,20 @@ export default function DashboardPage() {
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
               <h3 className="font-semibold mb-2">Browse Listings</h3>
               <p className="text-gray-400 text-sm mb-4">Find teams looking for your role</p>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm transition">
-                Coming in Phase 3
+              <button
+                onClick={() => router.push('/listings')}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm transition">
+                Browse Now
               </button>
             </div>
           ) : (
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-6">
               <h3 className="font-semibold mb-2">Post a Listing</h3>
               <p className="text-gray-400 text-sm mb-4">Find players for your team</p>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm transition">
-                Coming in Phase 3
+              <button
+                onClick={() => router.push('/listings/create')}
+                className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm transition">
+                Post Now
               </button>
             </div>
           )}

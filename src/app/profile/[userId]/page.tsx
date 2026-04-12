@@ -12,9 +12,10 @@ async function getProfile(userId: string) {
 export default async function PublicProfilePage({
   params
 }: {
-  params: { userId: string }
+  params: Promise<{ userId: string }>;
 }) {
-  const profile = await getProfile(params.userId);
+  const { userId } = await params;
+  const profile = await getProfile(userId);
 
   if (!profile) {
     return (
