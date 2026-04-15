@@ -172,7 +172,13 @@ export default function DashboardPage() {
         <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 mb-6 flex items-center justify-between shadow-lg shadow-cyan-950/20">
           <div className="flex items-center gap-5">
             <img
-              src={(isPlayer ? profile?.avatarUrl : profile?.logoUrl) || user?.avatar || ''}
+              src={
+                (isPlayer
+                  ? (profile as any)?.avatarUrl
+                  : (profile as any)?.logoUrl)
+                || user?.avatar
+                || ''
+              }
               alt={user?.username}
               className="w-16 h-16 rounded-full object-cover border-2 border-cyan-500"
             />
@@ -195,7 +201,7 @@ export default function DashboardPage() {
           <div className="bg-slate-900 border border-slate-800 rounded-2xl p-8 mb-6">
             <h2 className="text-lg font-semibold mb-4">Your Profile</h2>
             <div className="grid grid-cols-2 gap-4">
-              {isPlayer ? (
+              {/* {isPlayer ? (
                 <>
                   <div><p className="text-gray-400 text-sm">Game</p><p className="font-medium">{profile.game}</p></div>
                   <div><p className="text-gray-400 text-sm">Rank</p><p className="font-medium">{profile.rank}</p></div>
@@ -208,6 +214,45 @@ export default function DashboardPage() {
                   <div><p className="text-gray-400 text-sm">Team</p><p className="font-medium">{profile.teamName}</p></div>
                   <div><p className="text-gray-400 text-sm">Game</p><p className="font-medium">{profile.game}</p></div>
                   <div><p className="text-gray-400 text-sm">Region</p><p className="font-medium">{profile.region}</p></div>
+                </>
+              )} */}
+              {isPlayer ? (
+                <>
+                  <div>
+                    <p className="text-gray-400 text-sm">Game</p>
+                    <p className="font-medium">{user?.playerProfile?.game || 'Not set'}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Rank</p>
+                    <p className="font-medium">{user?.playerProfile?.rank || 'Not set'}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Role</p>
+                    <p className="font-medium">{user?.playerProfile?.role || 'Not set'}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Region</p>
+                    <p className="font-medium">{user?.playerProfile?.region || 'Not set'}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Current Team</p>
+                    <p className="font-medium">{user?.playerProfile?.currentTeam?.teamName || 'Free Agent'}</p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div>
+                    <p className="text-gray-400 text-sm">Team</p>
+                    <p className="font-medium">{user?.teamProfile?.teamName || 'Not set'}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Game</p>
+                    <p className="font-medium">{user?.teamProfile?.game || 'Not set'}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400 text-sm">Region</p>
+                    <p className="font-medium">{user?.teamProfile?.region || 'Not set'}</p>
+                  </div>
                 </>
               )}
             </div>
