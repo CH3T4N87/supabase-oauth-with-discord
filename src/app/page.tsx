@@ -42,7 +42,7 @@ export default function Home() {
         </div>
       </section>
       <section className="max-w-6xl mx-auto mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-        {['Valorant', 'CS2', 'League', 'Dota 2'].map((game) => (
+        {['Free Fire', 'Free Fire Max', 'BGMI', 'Dota 2'].map((game) => (
           <div key={game} className="rounded-xl border border-slate-800 p-4 bg-slate-900/60">
             <p className="text-sm text-slate-400">Top Queue</p>
             <p className="font-semibold">{game}</p>
