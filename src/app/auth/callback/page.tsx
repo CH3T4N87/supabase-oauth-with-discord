@@ -4,22 +4,55 @@ import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { saveToken } from '@/lib/auth';
 import Cookies from 'js-cookie';
+import api from '@/lib/api';
+import {
+  fetchDiscordUser,
+  parseDiscordCallbackHash,
+  validateDiscordState
+} from '@/lib/discord-auth';
 
 export default function AuthCallback() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const token = searchParams.get('token');
+    const completeDiscordLogin = async () => {
+      const existingToken = searchParams.get('token');
 
-    if (token) {
-      saveToken(token);
-      Cookies.set('token', token, { expires: 7 });
-      router.push('/dashboard');
-    } else {
-      router.push('/login');
-    }
-  }, [searchParams, router]);
+      if (existingToken) {
+        saveToken(existingToken);
+        Cookies.set('token', existingToken, { expires: 7 });
+        router.push('/dashboard');
+        return;
+      }
+
+      const { accessToken, state, error } = parseDiscordCallbackHash();
+
+      if (error || !accessToken || !validateDiscordState(state)) {
+        router.push('/login');
+        return;
+      }
+
+      try {
+        const discordUser = await fetchDiscordUser(accessToken);
+        const response = await api.post('/auth/discord/client-login', discordUser);
+        const token = response.data?.token as string | undefined;
+
+        if (!token) {
+          throw new Error('Missing app token');
+        }
+
+        saveToken(token);
+        Cookies.set('token', token, { expires: 7 });
+        window.history.replaceState({}, document.title, window.location.pathname);
+        router.push('/dashboard');
+      } catch {
+        router.push('/login');
+      }
+    };
+
+    void completeDiscordLogin();
+  }, [router, searchParams]);
 
   return (
     <main className="flex items-center justify-center min-h-screen">

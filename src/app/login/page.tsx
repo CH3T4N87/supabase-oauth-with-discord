@@ -1,8 +1,10 @@
 'use client';
 
+import { startDiscordLogin } from '@/lib/discord-auth';
+
 export default function LoginPage() {
   const handleDiscordLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/discord`;
+    startDiscordLogin();
   };
 
   return (
