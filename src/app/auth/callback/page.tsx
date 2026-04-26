@@ -1,6 +1,5 @@
-// 'use client';
+'use client';
 
-<<<<<<< HEAD
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { saveToken } from '@/lib/auth';
@@ -11,18 +10,12 @@ import {
   parseDiscordCallbackHash,
   validateDiscordState
 } from '@/lib/discord-auth';
-=======
-// import { useEffect } from 'react';
-// import { useRouter, useSearchParams } from 'next/navigation';
-// import { saveToken } from '@/lib/auth';
-// import Cookies from 'js-cookie';
->>>>>>> dad00cf9289dc42005d8edd8b0b7411cf9e14328
+import { Suspense } from 'react';
 
-// export default function AuthCallback() {
-//   const router = useRouter();
-//   const searchParams = useSearchParams();
+function AuthCallbackClient() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-<<<<<<< HEAD
   useEffect(() => {
     const completeDiscordLogin = async () => {
       const existingToken = searchParams.get('token');
@@ -61,32 +54,16 @@ import {
 
     void completeDiscordLogin();
   }, [router, searchParams]);
-=======
-//   useEffect(() => {
-//     const token = searchParams.get('token');
 
-//     if (token) {
-//       saveToken(token);
-//       Cookies.set('token', token, { expires: 7 });
-//       router.push('/dashboard');
-//     } else {
-//       router.push('/login');
-//     }
-//   }, [searchParams, router]);
->>>>>>> dad00cf9289dc42005d8edd8b0b7411cf9e14328
-
-//   return (
-//     <main className="flex items-center justify-center min-h-screen">
-//       <div className="text-center">
-//         <div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-//         <p className="text-gray-400">Signing you in...</p>
-//       </div>
-//     </main>
-//   );
-// }
-
-import { Suspense } from 'react';
-import AuthCallbackClient from './AuthCallbackClient';
+  return (
+    <main className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        <div className="w-10 h-10 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-gray-400">Signing you in...</p>
+      </div>
+    </main>
+  );
+}
 
 export default function AuthCallbackPage() {
   return (
